@@ -111,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: GoogleFonts.montserrat(color: Colors.red),
                   ),
                 ),
-                loginButton(),
+                registerButton(),
               ],
             ),
           ),
@@ -201,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Padding loginButton() {
+  Padding registerButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: ElevatedButton(
