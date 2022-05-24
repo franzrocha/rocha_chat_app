@@ -5,6 +5,7 @@ import 'package:rocha_chatapp/src/screens/authentication/register_screen.dart';
 import 'package:rocha_chatapp/src/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rocha_chatapp/src/widgets/text_field.dart';
 
 class AuthScreen extends StatefulWidget {
   static const String route = 'auth-screen';
@@ -19,7 +20,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _unCon = TextEditingController(),
+  final TextEditingController _emailCon = TextEditingController(),
       _passCon = TextEditingController();
   final AuthController _authController = locator<AuthController>();
 
@@ -33,11 +34,13 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   void dispose() {
+    _emailCon.dispose();
+    _passCon.dispose();
     _authController.removeListener(handleLogin);
     super.dispose();
   }
 
-  void handleLogin() {
+  handleLogin() {
     if (_authController.currentUser != null) {
       locator<NavigationService>().pushReplacementNamed(HomeScreen.route);
     }
@@ -72,50 +75,42 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 30, bottom: 30),
+                          padding: const EdgeInsets.only(top: 12),
+                          child: Image.asset("assets/images/chatter.png", height: 120, width: 200),),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20, bottom: 30),
                           child: Text(
-                            'Login',
+                            'LOGIN',
                             style: GoogleFonts.montserrat(
                               fontSize: 40,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xff000912),
+                              letterSpacing: 5,
                             ),
                           ),
                         ),
                         Container(
                           padding: const EdgeInsets.all(20),
-                          width: double.infinity,
-                          height: 300,
                           child: Center(
-                            child: AspectRatio(
-                              aspectRatio: 4 / 3,
-                              child: Card(
-                                elevation: 20,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                color: Colors.orange.withOpacity(0.6),
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  child: Center(
-                                    child: Form(
-                                      key: _formKey,
-                                      onChanged: () {
-                                        _formKey.currentState?.validate();
-                                        if (mounted) {
-                                          setState(() {});
-                                        }
-                                      },
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          emailForm(),
-                                          const SizedBox(height: 15),
-                                          passForm(),
-                                        ],
-                                      ),
-                                    ),
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              child: Center(
+                                child: Form(
+                                  key: _formKey,
+                                  onChanged: () {
+                                    _formKey.currentState?.validate();
+                                    if (mounted) {
+                                      setState(() {});
+                                    }
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      emailForm(),
+                                      const SizedBox(height: 15),
+                                      passForm(),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -151,7 +146,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   fontSize: 15,
                                   color: Colors.blueAccent,
                                   decoration: TextDecoration.underline),
-                            ))
+                            )),
                       ],
                     ),
                   ),
@@ -183,37 +178,12 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  TextFormField emailForm() {
-    return TextFormField(
-      decoration: const InputDecoration(
-        hintText: 'Email',
-        prefixIcon: Icon(Icons.email_rounded, size: 25),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.blue),
-        ),
-      ),
-      controller: _unCon,
+   TextFieldWidget emailForm() {
+    return TextFieldWidget(
+      controller: _emailCon,
+      hintText: 'Email',
+      prefixIcon: const Icon(Icons.email_rounded, size: 25),
+      obscureText: false,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter your email';
@@ -223,44 +193,18 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  TextFormField passForm() {
-    return TextFormField(
-      obscureText: true,
-      decoration: const InputDecoration(
-        hintText: 'Password',
-        prefixIcon: Icon(Icons.wifi_password, size: 30),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50),
-          ),
-          borderSide: BorderSide(color: Colors.blue),
-        ),
-      ),
+TextFieldWidget passForm() {
+    return TextFieldWidget(
       controller: _passCon,
+      hintText: 'Password', 
+      prefixIcon: const Icon(Icons.key,size: 25),
+      obscureText: true,
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter your password';
-        }
-        return null;
-      },
+          if (value == null || value.isEmpty) {
+            return 'Please enter your password';
+          }
+          return null;
+        },
     );
   }
 
@@ -271,11 +215,11 @@ class _AuthScreenState extends State<AuthScreen> {
         onPressed: (_formKey.currentState?.validate() ?? false)
             ? () {
                 _authController.login(
-                    _unCon.text.trim(), _passCon.text.trim());
+                    _emailCon.text.trim(), _passCon.text.trim());
               }
             : null,
         style: ElevatedButton.styleFrom(
-            minimumSize: const Size(250, 60),
+            minimumSize: const Size(350, 60),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
             ),
@@ -283,7 +227,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ? const Color(0xff333d79)
                 : Colors.black38),
         child: Text(
-          'Log in',
+          'LOG IN',
           style: GoogleFonts.openSans(fontSize: 25),
         ),
       ),

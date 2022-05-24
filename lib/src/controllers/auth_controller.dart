@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rocha_chatapp/service_locators.dart';
+import 'package:rocha_chatapp/src/models/chat_user_model.dart';
 import 'package:rocha_chatapp/src/screens/authentication/auth_screen.dart';
 import 'package:rocha_chatapp/src/screens/home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -67,9 +69,31 @@ class AuthController with ChangeNotifier{
     return;
   }
 
-  Future<UserCredential?> register(
-      {required String email, required String password}) async {
-    return await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+  Future register(
+      {required String email,
+      required String password,
+      required String username}) async {
+   try {
+      working = true;
+      notifyListeners();
+      UserCredential createdUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      if(createdUser.user!=null){
+        ChatUser userModel = ChatUser(createdUser.user!.uid, username, email,
+            '', Timestamp.now(), Timestamp.now());
+        return FirebaseFirestore.instance
+            .collection('users')
+            .doc(userModel.uid)
+            .set(userModel.json);
+
+      }
+    } on FirebaseAuthException catch(e){
+     print(e.message);
+     print(e.code);
+     working = false;
+     currentUser = null;
+     error = e;
+     notifyListeners();
+   }
   }
 }
