@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rocha_chatapp/service_locators.dart';
 import 'package:rocha_chatapp/src/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +59,28 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text('Chatting from ${user?.username ?? '...'}'),
-        actions: [IconButton(onPressed: (){_auth.logout();}, icon: const Icon(Icons.logout))],
+        backgroundColor: const Color(0xff333d79),
+        title: Row(
+          children: [
+            const Icon(Icons.message_outlined),
+            const SizedBox(
+              width: 6,
+            ),
+            Text('Chatting from ${user?.username ?? '...'}',
+                style: GoogleFonts.openSans(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20.0,
+                )),
+          ],
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                _auth.logout();
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
@@ -105,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   IconButton(
                     icon: const Icon(
                       Icons.send,
-                      color: Colors.redAccent,
+                      color: Color(0xff333d79),
                     ),
                     onPressed: send,
                   )
@@ -138,12 +159,14 @@ class ChatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(8),
-      width: double.maxFinite,
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
+      width: 500,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        color: Colors.white,
+        color: chat.sentBy == FirebaseAuth.instance.currentUser?.uid
+            ? const Color.fromARGB(255, 100, 120, 233)
+            : Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -158,7 +181,9 @@ class ChatCard extends StatelessWidget {
         children: [
           Flexible(
             child: Container(
-              color: Colors.white,
+              color: chat.sentBy == FirebaseAuth.instance.currentUser?.uid
+                  ? const Color.fromARGB(255, 100, 120, 233)
+                  : Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -167,19 +192,35 @@ class ChatCard extends StatelessWidget {
                       future: ChatUser.fromUid(uid: chat.sentBy),
                       builder: (context, AsyncSnapshot<ChatUser> snap) {
                         if (snap.hasData) {
-                          return Text(chat.sentBy ==
-                                  FirebaseAuth.instance.currentUser?.uid
-                              ? 'You sent:'
-                              : '${snap.data?.username} sent');
+                          return Text(
+                            chat.sentBy ==
+                                    FirebaseAuth.instance.currentUser?.uid
+                                ? 'You:'
+                                : '${snap.data?.username}:',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87),
+                          );
                         }
                         return const Text('User');
                       }),
-                  Text(chat.message),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      chat.message,
+                      style: const TextStyle(color: Colors.black87),
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                    Text(chat.ts.toDate().toString())
-                  ],)
+                      Text(
+                        chat.formatDate(chat.ts.toDate()),
+                        style: const TextStyle(color: Colors.black87),
+                      ),
+                    ],
+                  )
                   // Text(
                   //     'Message seen by ${chat.seenBy}')
                 ],

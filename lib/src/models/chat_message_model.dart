@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class ChatMessage {
   final String uid, sentBy, message;
@@ -40,4 +41,10 @@ class ChatMessage {
       .orderBy('ts')
       .snapshots()
       .map(ChatMessage.fromQuerySnap);
+
+
+  String formatDate(DateTime date){
+    return Moment.fromDateTime(date).format('hh:mm a MMMM dd, yyyy ');
+  }
+
 }
