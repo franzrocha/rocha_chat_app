@@ -175,7 +175,7 @@ TextFieldWidget passForm() {
       controller: _usernameCon,
       hintText: 'Username',
       prefixIcon: const Icon(Icons.people, size: 25),
-      obscureText: true,
+      obscureText: false,
       validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter your username';
