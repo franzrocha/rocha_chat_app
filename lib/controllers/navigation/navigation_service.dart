@@ -2,8 +2,11 @@
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
-import '../../screens/authentication/auth_screen.dart';
+
+import 'package:rocha_chat_app/screens/authentication/auth_screen.dart';
+
 import '../../screens/home/home_screen.dart';
+
 part 'navigation_animations.dart';
 part 'navigation_routing.dart';
 

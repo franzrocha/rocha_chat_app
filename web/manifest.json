@@ -1,6 +1,6 @@
 {
-    "name": "rocha_chatapp",
-    "short_name": "rocha_chatapp",
+    "name": "rocha_chat_app",
+    "short_name": "rocha_chat_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

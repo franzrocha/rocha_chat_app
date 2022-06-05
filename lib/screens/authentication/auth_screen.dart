@@ -1,11 +1,12 @@
-import 'package:rocha_chatapp/service_locators.dart';
-import 'package:rocha_chatapp/src/controllers/auth_controller.dart';
-import 'package:rocha_chatapp/src/controllers/navigation/navigation_service.dart';
-import 'package:rocha_chatapp/src/screens/authentication/register_screen.dart';
-import 'package:rocha_chatapp/src/screens/home/home_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rocha_chatapp/src/widgets/text_field.dart';
+import 'package:rocha_chat_app/controllers/auth_controller.dart';
+import 'package:rocha_chat_app/controllers/navigation/navigation_service.dart';
+import 'package:rocha_chat_app/screens/authentication/register_screen.dart';
+import 'package:rocha_chat_app/screens/home/home_screen.dart';
+import 'package:rocha_chat_app/service_locators.dart';
+import 'package:rocha_chat_app/widgets/text_field.dart';
 
 class AuthScreen extends StatefulWidget {
   static const String route = 'auth-screen';

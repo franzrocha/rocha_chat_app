@@ -1,8 +1,9 @@
-import 'package:rocha_chatapp/service_locators.dart';
-import 'package:rocha_chatapp/src/controllers/navigation/navigation_service.dart';
-import 'package:flutter/material.dart';
 
-import 'screens/authentication/auth_screen.dart';
+
+import 'package:flutter/material.dart';
+import 'package:rocha_chat_app/controllers/navigation/navigation_service.dart';
+import 'package:rocha_chat_app/screens/authentication/auth_screen.dart';
+import 'package:rocha_chat_app/service_locators.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({

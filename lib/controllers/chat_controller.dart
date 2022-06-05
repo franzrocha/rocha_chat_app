@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rocha_chatapp/src/models/chat_message_model.dart';
+import 'package:rocha_chat_app/models/chat_message_model.dart';
 
 class ChatController with ChangeNotifier {
   late StreamSubscription _chatSub;
@@ -20,8 +20,8 @@ class ChatController with ChangeNotifier {
   }
 
   chatUpdateHandler(List<ChatMessage> update) {
-    for(ChatMessage message in update){
-      if(message.hasNotSeenMessage(FirebaseAuth.instance.currentUser!.uid)){
+    for (ChatMessage message in update) {
+      if (message.hasNotSeenMessage(FirebaseAuth.instance.currentUser!.uid)) {
         message.updateSeen(FirebaseAuth.instance.currentUser!.uid);
       }
     }

@@ -1,7 +1,8 @@
-import 'package:rocha_chatapp/service_locators.dart';
-import 'package:rocha_chatapp/src/controllers/auth_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rocha_chat_app/controllers/auth_controller.dart';
+import 'package:rocha_chat_app/service_locators.dart';
 import '../../widgets/text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final AuthController _authController = locator<AuthController>();
 
   String prompts = '';
+
 
   @override
   void dispose() {
@@ -185,6 +187,7 @@ TextFieldWidget passForm() {
     );
   }
 
+ 
   Padding registerButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -195,6 +198,7 @@ TextFieldWidget passForm() {
                   email: _emailCon.text.trim(),
                   password: _passCon.text.trim(),
                   username: _usernameCon.text.trim(),
+                  
                 );
               }
             : null,
@@ -214,3 +218,4 @@ TextFieldWidget passForm() {
     );
   }
 }
+

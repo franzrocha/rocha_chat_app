@@ -1,12 +1,16 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:rocha_chatapp/service_locators.dart';
-import 'package:rocha_chatapp/src/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:rocha_chatapp/src/controllers/chat_controller.dart';
-import 'package:rocha_chatapp/src/models/chat_message_model.dart';
-import 'package:rocha_chatapp/src/models/chat_user_model.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:rocha_chat_app/controllers/auth_controller.dart';
+import 'package:rocha_chat_app/controllers/chat_controller.dart';
+import 'package:rocha_chat_app/models/chat_message_model.dart';
+import 'package:rocha_chat_app/models/chat_user_model.dart';
+import 'package:rocha_chat_app/service_locators.dart';
+import 'package:rocha_chat_app/services/image_service.dart';
 import 'package:simple_moment/simple_moment.dart';
+
+import '../../widgets/avatar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = 'home-screen';
@@ -58,9 +62,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(user != null ? user!.username : '. . .'),
+        title: Text(
+          user != null ? user!.username : '. . .',  
+          style: GoogleFonts.openSans(  
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor: const Color(0xff333d79),
         actions: [
+          InkWell(
+            onTap: () {
+              ImageService.updateProfileImage();
+            },
+            child: AvatarImage(uid: FirebaseAuth.instance.currentUser!.uid),
+          ),
+          const SizedBox(
+            width: 8,
+          ),
           IconButton(
               onPressed: () async {
                 _auth.logout();
@@ -177,21 +196,23 @@ class ChatCard extends StatelessWidget {
                               ? MainAxisAlignment.start
                               : MainAxisAlignment.end,
                       children: [
-                        FutureBuilder<ChatUser>(
-                            future: ChatUser.fromUid(uid: chat.sentBy),
-                            builder: (context, AsyncSnapshot<ChatUser> snap) {
-                              if (snap.hasData) {
-                                return Text(
-                                  chat.sentBy ==
-                                          FirebaseAuth.instance.currentUser?.uid
-                                      ? 'You'
-                                      : '${snap.data?.username}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                );
-                              }
-                              return const Text('Getting user...');
-                            }),
+                          if (chat.sentBy !=
+                            FirebaseAuth.instance.currentUser?.uid)
+                          AvatarImage(uid: chat.sentBy, radius: 12,),
+                           if (chat.sentBy ==
+                            FirebaseAuth.instance.currentUser?.uid)
+                          AvatarImage(uid: chat.sentBy, radius: 12,),
+                        if (chat.sentBy !=
+                            FirebaseAuth.instance.currentUser?.uid)
+                          const SizedBox(
+                            width: 8,
+                          ),
+                        if (chat.sentBy ==
+                            FirebaseAuth.instance.currentUser?.uid)
+                          const Text('You')
+                        else
+                          UserNameFromDB(uid: chat.sentBy),
+                      
                       ],
                     ),
                   ),
@@ -253,6 +274,7 @@ class ChatCard extends StatelessWidget {
                                     child: const Icon(
                                       Icons.edit,
                                       size: 12,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   const SizedBox(width: 10),
@@ -263,6 +285,7 @@ class ChatCard extends StatelessWidget {
                                     child: const Icon(
                                       Icons.delete,
                                       size: 12,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ]),
@@ -372,7 +395,7 @@ class _ChatEditingDialogState extends State<ChatEditingDialog> {
                   ),
                   onPressed: () {
                     widget.chat.updateMessage('[edited message] ${tCon.text}');
-                     Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   },
                 )
               ],

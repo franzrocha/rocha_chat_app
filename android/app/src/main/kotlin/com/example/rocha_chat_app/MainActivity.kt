@@ -1,4 +1,4 @@
-package com.example.rocha_chatapp
+package com.example.rocha_chat_app
 
 import io.flutter.embedding.android.FlutterActivity
 

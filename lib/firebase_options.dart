@@ -47,29 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBcoQy_DcaAiWyhkxJto9tBKbS-LE8u4pI',
-    appId: '1:685520947066:web:0d74c5b930b51b0c2338c3',
-    messagingSenderId: '685520947066',
-    projectId: 'rocha-chat-app',
-    authDomain: 'rocha-chat-app.firebaseapp.com',
-    storageBucket: 'rocha-chat-app.appspot.com',
+    apiKey: 'AIzaSyCEWVypojZXcWHCB5jCkBC8YYV8qrrDNr4',
+    appId: '1:45903894614:web:3bf59004f4493fe9f943f7',
+    messagingSenderId: '45903894614',
+    projectId: 'rochachat-app',
+    authDomain: 'rochachat-app.firebaseapp.com',
+    storageBucket: 'rochachat-app.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBbhjlVLOiizYzKva1oHJYOdJ_I6Jx55Ys',
-    appId: '1:685520947066:android:5df3cc3c065a66d12338c3',
-    messagingSenderId: '685520947066',
-    projectId: 'rocha-chat-app',
-    storageBucket: 'rocha-chat-app.appspot.com',
+    apiKey: 'AIzaSyAdLA_M4hofWE9icnzWLDBUX5wLStkiMeQ',
+    appId: '1:45903894614:android:faedb6575892de2af943f7',
+    messagingSenderId: '45903894614',
+    projectId: 'rochachat-app',
+    storageBucket: 'rochachat-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDJJb-g6CFxEeIkG9B-mEiJBzveYMyN1xg',
-    appId: '1:685520947066:ios:6d329b251a97ee612338c3',
-    messagingSenderId: '685520947066',
-    projectId: 'rocha-chat-app',
-    storageBucket: 'rocha-chat-app.appspot.com',
-    iosClientId: '685520947066-hd4dtejtlobdhn6op2edjr5mc6om5ok3.apps.googleusercontent.com',
-    iosBundleId: 'com.example.rochaChatapp',
+    apiKey: 'AIzaSyAXmi44o1YF6oWbY4BxMuxi7sMqA8k6dAY',
+    appId: '1:45903894614:ios:42f230c13fc5a4a2f943f7',
+    messagingSenderId: '45903894614',
+    projectId: 'rochachat-app',
+    storageBucket: 'rochachat-app.appspot.com',
+    iosClientId: '45903894614-or5avgr8c6jopp0kj97nguif3go1h2qs.apps.googleusercontent.com',
+    iosBundleId: 'com.example.rochaChatApp',
   );
 }

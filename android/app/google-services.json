@@ -1,77 +1,34 @@
 {
   "project_info": {
-    "project_number": "685520947066",
-    "project_id": "rocha-chat-app",
-    "storage_bucket": "rocha-chat-app.appspot.com"
+    "project_number": "45903894614",
+    "project_id": "rochachat-app",
+    "storage_bucket": "rochachat-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:685520947066:android:f89044f23d359e102338c3",
+        "mobilesdk_app_id": "1:45903894614:android:faedb6575892de2af943f7",
         "android_client_info": {
-          "package_name": "com.example.chat_app"
+          "package_name": "com.example.rocha_chat_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "685520947066-jjnes8o5s1ln2ci6f6siuae4mrh4eflh.apps.googleusercontent.com",
+          "client_id": "45903894614-55id3f5gfjvsff978ssb0g2uidk6vgi6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBbhjlVLOiizYzKva1oHJYOdJ_I6Jx55Ys"
+          "current_key": "AIzaSyAdLA_M4hofWE9icnzWLDBUX5wLStkiMeQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "685520947066-jjnes8o5s1ln2ci6f6siuae4mrh4eflh.apps.googleusercontent.com",
+              "client_id": "45903894614-55id3f5gfjvsff978ssb0g2uidk6vgi6.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "685520947066-703se5hobg8a4hu83pl95pje2agtepib.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.chatApp"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:685520947066:android:5df3cc3c065a66d12338c3",
-        "android_client_info": {
-          "package_name": "com.example.rocha_chatapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "685520947066-jjnes8o5s1ln2ci6f6siuae4mrh4eflh.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBbhjlVLOiizYzKva1oHJYOdJ_I6Jx55Ys"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "685520947066-jjnes8o5s1ln2ci6f6siuae4mrh4eflh.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "685520947066-703se5hobg8a4hu83pl95pje2agtepib.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.chatApp"
-              }
             }
           ]
         }
